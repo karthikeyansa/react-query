@@ -1,18 +1,31 @@
-import {QueryClientProvider, QueryClient} from "react-query";
+import React, { useState } from "react";
+import { useMutation } from "react-query";
 import AppOne from "./components/AppOne";
 import AppTwo from "./components/AppTwo";
-import './App.css';
+import "./App.css";
+import * as helper from "./helpers/HelperFunction";
 
 function App() {
-  const queryClient = new QueryClient();
+  const { mutate } = useMutation(helper.addUser);
+  const [userName, setUserName] = useState("");
+
   return (
-    <div style={{display:"flex"}}>
-      <AppOne />
-      <h1>&nbsp;VS&nbsp;</h1>
-      <QueryClientProvider client={queryClient}>
-        <AppTwo />
-      </QueryClientProvider>
-    </div>
+    <React.Fragment>
+        <div>
+          <h3>Add a user</h3>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <button onClick={() => mutate(userName)}>add user</button>
+        </div>
+        <div style={{ display: "flex" }}>
+          <AppOne />
+          <h1>&nbsp;VS&nbsp;</h1>
+          <AppTwo />
+        </div>
+    </React.Fragment>
   );
 }
 

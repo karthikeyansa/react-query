@@ -2,7 +2,9 @@ import {useQuery} from "react-query";
 import {fetchUrl} from "../helpers/HelperFunction";
 
 function AppTwo() {
-    const {isLoading, error, data} = useQuery("usersData", fetchUrl);
+    const {isLoading, error, data} = useQuery("usersData", fetchUrl, {
+      staleTime:2,
+    });
 
     if(isLoading) return (<h1>loading...</h1>);
     if(error) return (<h1>Error...</h1>);

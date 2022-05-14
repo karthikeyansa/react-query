@@ -1,1 +1,1 @@
-export const usersUrl = "https://jsonplaceholder.typicode.com/users";
+export const appUrl = "http://localhost:4000";
